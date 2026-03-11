@@ -1,5 +1,7 @@
 # ipTIME WOL Fast
 
+![Preview](/preview.png)
+
 서버에서 ipTIME 공유기에 로그인하여 등록된 WOL(Wake-on-LAN) 기기 목록을 가져오고, 내부 API 라우트를 통해 WOL 신호를 전송하는 Next.js 애플리케이션입니다.
 
 ## 환경 변수
