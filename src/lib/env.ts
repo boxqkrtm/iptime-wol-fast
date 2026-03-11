@@ -35,8 +35,8 @@ export function readIptimeConfig(source: NodeJS.ProcessEnv | Record<string, stri
   }
 
   return {
-    endpoint,
-    username,
-    password,
+    endpoint: endpoint!,
+    username: username!,
+    password: password!,
   };
 }

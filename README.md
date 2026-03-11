@@ -10,6 +10,7 @@
 iptime_end_point=http://your-router-host:9999
 iptime_id=your-router-admin-id
 iptime_pw=your-router-admin-password
+WOL_WEB_PASSWORD_HASH=sha256-hex  # 비워두면 비번 없이 동작
 ```
 
 `.env` 파일은 git에 의해 무시됩니다. `.env.example` 파일을 템플릿으로 사용하세요.
@@ -20,6 +21,17 @@ iptime_pw=your-router-admin-password
 npm install
 npm run dev
 ```
+
+### 웹 잠금 비밀번호 변경
+
+```bash
+npm run set-password -- <원하는_비밀번호>
+npm run set-password -- --disable
+```
+
+`set-password`는 평문 비밀번호를 받아 SHA-256 해시를 생성해 `.env`의 `WOL_WEB_PASSWORD_HASH`에 저장한다.
+`--disable`을 쓰면 `WOL_WEB_PASSWORD_HASH`를 비워서 웹/API 인증을 비활성화한다.
+`WOL_WEB_PASSWORD_HASH`가 비어 있으면 웹/API 인증을 요구하지 않습니다.
 
 ## API 라우트
 

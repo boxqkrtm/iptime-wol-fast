@@ -6,6 +6,9 @@ import type { WolDevice } from '@/lib/iptime/types';
 
 import { WolDeviceItem } from './wol-device-item';
 
+const API_AUTH_HEADER = 'x-wol-auth';
+const AUTH_STORAGE_KEY = 'iptime-wol-fast-auth';
+
 type DevicesResponse = {
   devices?: WolDevice[];
   error?: string;
@@ -15,6 +18,21 @@ type WakeResponse = {
   ok?: boolean;
   error?: string;
 };
+
+function getAuthHeaders(): HeadersInit {
+  if (typeof window === 'undefined') {
+    return {};
+  }
+
+  const passwordHash = window.localStorage.getItem(AUTH_STORAGE_KEY);
+  if (!passwordHash) {
+    return {};
+  }
+
+  return {
+    [API_AUTH_HEADER]: passwordHash,
+  };
+}
 
 export function WolDashboard() {
   const [devices, setDevices] = useState<WolDevice[]>([]);
@@ -36,7 +54,10 @@ export function WolDashboard() {
     setError(null);
 
     try {
-      const response = await fetch('/api/wol/devices', { cache: 'no-store' });
+      const response = await fetch('/api/wol/devices', {
+        cache: 'no-store',
+        headers: getAuthHeaders(),
+      });
       const body = (await response.json()) as DevicesResponse;
 
       if (!response.ok || body.error) {
@@ -74,6 +95,7 @@ export function WolDashboard() {
       const response = await fetch('/api/wol/wake', {
         method: 'POST',
         headers: {
+          ...getAuthHeaders(),
           'content-type': 'application/json',
         },
         body: JSON.stringify({

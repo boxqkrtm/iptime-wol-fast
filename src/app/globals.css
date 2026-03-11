@@ -162,6 +162,33 @@ h2 {
   min-width: 10rem;
 }
 
+.auth-only {
+  max-width: 460px;
+}
+
+.auth-form {
+  margin-top: 1.5rem;
+  display: grid;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.auth-input {
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+  background: rgba(2, 6, 23, 0.6);
+  color: #e2e8f0;
+  width: 100%;
+  min-width: 0;
+}
+
+.auth-input:focus {
+  outline: none;
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 3px rgb(56 189 248 / 15%);
+}
+
 .empty-state {
   margin-top: 1.5rem;
   text-align: center;
